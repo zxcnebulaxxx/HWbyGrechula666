@@ -7,11 +7,12 @@ from datetime import datetime
 URL = "https://hotmc.ru/minecraft-server-211679"
 
 def get_online():
-try:
-headers = {
-"User-Agent": "Mozilla/5.0"
-}
+    try:
+        headers = {
+        "User-Agent": "Mozilla/5.0"
+        }
 
+```
     response = requests.get(URL, headers=headers, timeout=15)
     response.raise_for_status()
 
@@ -27,6 +28,7 @@ headers = {
 
 except Exception as e:
     return f"error: {str(e)}"
+```
 
 def get_coin_price():
 return 185
@@ -34,6 +36,7 @@ return 185
 def save_to_csv():
 now = datetime.now()
 
+```
 row = [
     now.strftime("%d.%m.%Y"),
     now.strftime("%H:%M"),
@@ -55,6 +58,7 @@ with open(file_name, "a", newline="", encoding="utf-8") as file:
     writer.writerow(row)
 
 print("Saved:", row)
+```
 
-if name == "main":
+if **name** == "**main**":
 save_to_csv()
