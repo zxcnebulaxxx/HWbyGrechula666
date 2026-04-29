@@ -1,13 +1,41 @@
+return 5400
+```python
 import csv
+import re
+import requests
+from bs4 import BeautifulSoup
 from datetime import datetime
 
+URL = "https://hotmc.ru/minecraft-server-211679"
+
 def get_online():
-    # пока вручную
-    return 5400
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
+
+        response = requests.get(URL, headers=headers, timeout=15)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        text = " ".join(soup.stripped_strings)
+
+        # Ищем что-то вроде: Игроки: 5421 из 15000
+        match = re.search(r"Игроки:\s*(\d+)\s*из", text)
+
+        if match:
+            return int(match.group(1))
+
+        return "not found"
+
+    except Exception as e:
+        return f"error: {str(e)}"
+
 
 def get_coin_price():
-    # пока вручную
+    # Пока вручную
     return 185
+
 
 def save_to_csv():
     now = datetime.now()
@@ -32,7 +60,9 @@ def save_to_csv():
         writer = csv.writer(file)
         writer.writerow(row)
 
-    print("Данные сохранены:", row)
+    print("Saved:", row)
+
 
 if __name__ == "__main__":
     save_to_csv()
+```
