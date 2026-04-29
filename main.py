@@ -1,3 +1,4 @@
+writing{variant="standard" id="10004"}
 import csv
 import re
 import requests
@@ -18,7 +19,6 @@ def get_online():
         soup = BeautifulSoup(response.text, "html.parser")
         text = " ".join(soup.stripped_strings)
 
-        # Ищем что-то вроде: Игроки: 5421 из 15000
         match = re.search(r"Игроки:\s*(\d+)\s*из", text)
 
         if match:
@@ -31,7 +31,6 @@ def get_online():
 
 
 def get_coin_price():
-    # Пока вручную
     return 185
 
 
@@ -63,4 +62,3 @@ def save_to_csv():
 
 if __name__ == "__main__":
     save_to_csv()
-```
