@@ -1,5 +1,3 @@
-return 5400
-
 import csv
 import re
 import requests
