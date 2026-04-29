@@ -7,9 +7,9 @@ from datetime import datetime
 URL = "https://hotmc.ru/minecraft-server-211679"
 
 def get_online():
-try:
-headers = {
-"User-Agent": "Mozilla/5.0"
+    try:
+        headers = {
+        "User-Agent": "Mozilla/5.0"
 }
 
     response = requests.get(URL, headers=headers, timeout=15)
